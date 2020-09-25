@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>Connect Four!</title>
+  <style>
+    .game-board {
+      margin: 30%;
+    }
+
+    #ans {
+      height: 300px;
+      width: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Connect Four</h1>
+  <div class="game-board">
+    <form id="matrix">
+      <input id="ans" value="[[null,null,null,null,null,null,null],
+          [null,null,null,null,null,null,null],
+          [null,null,null,null,null,null,null],
+          [null,null,null,null,null,null,null],
+          [null,null,null,null,null,null,null],
+          [null,null,null,null,null,null,null],
+          [null,null,null,null,null,null,null]]" name="ans" />
+
+      <button id="submit">submit</button>
+    </form>
+    <p style="display: none;" id="result">result</p>
+  </div>
+
+  <script>
+    $('#matrix').on('submit', function (e) {
+      e.preventDefault();
+      var payload = { 'ans': document.getElementById('ans').value };
+      console.log(payload);
+      $.ajax({
+        method: 'POST',
+        url: 'http://localhost:3000/check',
+        body: JSON.stringify(payload),
+        headers: {
+          'content-type': 'application/json'
+        },
+          success: function (data) {
+          if (data.status == "win") {
+            document.getElementById('result').innerHTML = data.winner + 'is Winner';
+          }
+        }
+      })
+    })
+  </script>
+</body>
+
+</html>
