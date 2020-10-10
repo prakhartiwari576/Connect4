@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="google-signin-client_id" content="883808156358-vcqjbce2fd3ljs6cb7pca1aseb4rnq6h.apps.googleusercontent.com">
+	</head>
+<BODY>
+	<H1>Sign up</H1>
+	<form action="/signup" method="post">
+		<input name="email" id="email" placeholder="email">
+		<input name="password" id="password" placeholder="password">
+		<input type="submit" value="Submit"> 
+
+	</form>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<div class="g-signin2" data-onsuccess="onSignIn"></div>
+	<a href="#" onclick="signOut();">Sign out</a>
+	<script>
+	  function signOut() {
+		var auth2 = gapi.auth2.getAuthInstance();
+		auth2.signOut().then(function () {
+		  console.log('User signed out.');
+		});
+	  }
+	</script>
+	<h1>login</h1>
+
+	<form action="/login" method="post">
+		<input name="email" id="email" placeholder="email">
+		<input name="password" id="password" placeholder="password">
+		<input type="submit" value="Submit"> 
+
+	</form>
+	<script type="text/javascript" src="/index.js"></script>
+</BODY>
+</html>
